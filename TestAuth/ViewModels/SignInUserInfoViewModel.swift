@@ -7,15 +7,18 @@
 
 import UIKit
 
-class SignInUserInfoViewModel {
+class SignInUserInfoViewModel :ObservableObject{
     
     private let userDefaults: UserDefaultsProtocol
     
     init(userDefaults: UserDefaultsProtocol = UserDefaultsWrapper.shared) {
         self.userDefaults = userDefaults
+        self.displayName = userDefaults.object(forKey: "SignInUserName") as? String ?? "none"
     }
     
     static let shared = SignInUserInfoViewModel()
+    
+    @Published var displayName:String = ""
     
     var signInUserId: String {
         get {
@@ -31,6 +34,7 @@ class SignInUserInfoViewModel {
             return userDefaults.object(forKey: "SignInUserName") as? String ?? "none"
         }
         set {
+            displayName = newValue
             userDefaults.set(newValue, forKey: "SignInUserName")
         }
     }

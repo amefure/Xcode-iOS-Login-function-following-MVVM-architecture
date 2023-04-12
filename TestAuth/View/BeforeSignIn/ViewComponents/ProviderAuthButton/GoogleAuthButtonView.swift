@@ -44,9 +44,12 @@ struct GoogleAuthButtonView: View {
                     }
                 }
             }else{
-                authVM.editUserInfo(credential: nil, name: userEditReauthName, pass: nil, completion: { result in
-                    isActive = true
-                })
+                // MARK: - ユーザーネーム変更
+                authVM.editUserNameGoogle(name: userEditReauthName) {result in
+                    if result {
+                        isActive = true
+                    }
+                }
             }
             
         }, label: {

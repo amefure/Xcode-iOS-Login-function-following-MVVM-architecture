@@ -29,8 +29,8 @@ struct EditUserNameView: View {
                     
                     SecureInputView(password: $pass)
                     Button {
-                        authVM.editUserInfo(credential: nil, name: name, pass: pass) { result in
-                            
+                        authVM.editUserInfoEmail(name: name, pass: pass) { result in
+                            isActive = true
                         }
                     } label: {
                         Text("更新")
@@ -45,6 +45,8 @@ struct EditUserNameView: View {
             case .none:
                 EmptyView()
             }
+        }.alert("更新しました", isPresented: $isActive) {
+            
         }
     }
 }
@@ -54,4 +56,3 @@ struct EditUserNameView_Previews: PreviewProvider {
         EditUserNameView()
     }
 }
-

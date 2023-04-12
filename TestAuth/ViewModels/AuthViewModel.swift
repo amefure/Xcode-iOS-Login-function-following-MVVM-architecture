@@ -72,40 +72,7 @@ class AuthViewModel:ObservableObject {
             completion(self.switchResultAndSetErrorMsg(result))
         }
     }
-    
-    /// ユーザー情報編集
-    public func editUserInfo(credential:AuthCredential?,name:String,pass:String?,completion: @escaping (Bool) -> Void ) {
-        let providerStr = userInfoVM.signInUserProvider
-        switch AuthProviderModel.getProviderModel(rawValue: providerStr) {
-        case .email:
-            emailAuth.editUserInfoEmail(name: name, pass: pass!) { result in
-                self.setCurrentUserInfo(provider: .email)
-                completion(self.switchResultAndSetErrorMsg(result))
-            }
-        case .apple:
-            if let user = auth.getCurrentUser() {
-                appleAuth.editUserNameApple(user: user, credential: credential!, name: name) { result in
-                    self.setCurrentUserInfo(provider: .apple)
-                    completion(self.switchResultAndSetErrorMsg(result))
-                }
-            }
-        case .google:
-            googleAuth.getCredential { credential in
-                if let user = self.auth.getCurrentUser() {
-                    if credential != nil {
-                        self.googleAuth.editUserNameGoogle(user: user, credential: credential!, name: name) { result in
-                            self.setCurrentUserInfo(provider: .google)
-                            completion(self.switchResultAndSetErrorMsg(result))
-                        }
-                    }
-                }
-            }
-        case .none:
-            print("none")
-        }
-        
-    }
-    
+
 }
 
 // MARK: - Email
@@ -153,6 +120,13 @@ extension AuthViewModel {
         }
     }
     
+    /// ユーザー情報編集
+    public func editUserInfoEmail(name:String,pass:String,completion: @escaping (Bool) -> Void ) {
+        emailAuth.editUserInfoEmail(name: name, pass: pass) { result in
+            self.setCurrentUserInfo(provider: .email)
+            completion(self.switchResultAndSetErrorMsg(result))
+        }
+    }
 }
 
 // MARK: - Google
@@ -195,6 +169,20 @@ extension AuthViewModel {
             }
         }
     }
+
+    /// ユーザー情報編集
+    public func editUserNameGoogle(name:String,completion: @escaping (Bool) -> Void ) {
+        googleAuth.getCredential { credential in
+            if let user = self.auth.getCurrentUser() {
+                if credential != nil {
+                    self.googleAuth.editUserNameGoogle(user: user, credential: credential!, name: name) { result in
+                        self.setCurrentUserInfo(provider: .google)
+                        completion(self.switchResultAndSetErrorMsg(result))
+                    }
+                }
+            }
+        }
+    }
     
 }
 
@@ -226,5 +214,13 @@ extension AuthViewModel {
         return appleAuth.switchAuthResult(result: result)
     }
     
+    /// ユーザー情報編集
+    public func editUserNameApple(credential:AuthCredential,name:String,completion: @escaping (Bool) -> Void ) {
+        if let user = auth.getCurrentUser() {
+            appleAuth.editUserNameApple(user: user, credential: credential, name: name) { result in
+                self.setCurrentUserInfo(provider: .apple)
+                completion(self.switchResultAndSetErrorMsg(result))
+            }
+        }
+    }
 }
-

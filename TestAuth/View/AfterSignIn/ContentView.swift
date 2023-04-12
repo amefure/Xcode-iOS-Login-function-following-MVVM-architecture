@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
+
+    @ObservedObject var signInUserInfoVM = SignInUserInfoViewModel.shared
     
     var body: some View {
         VStack {
             
             // MARK: - ユーザー名とプロバイダーを表示
-            Text(SignInUserInfoViewModel.shared.signInUserName)
-            Text(SignInUserInfoViewModel.shared.signInUserProvider)
+            Text(signInUserInfoVM.displayName)
+            Text(signInUserInfoVM.signInUserProvider)
             
             Divider()
             

@@ -69,10 +69,10 @@ struct AppleAuthButtonView: View {
                 }
                 
             }else{
-                // MARK: - ユーザーネーム変更 未実装
-                authVM.editUserInfo(credential: credential, name: userEditReauthName, pass: nil) { result in
+                // MARK: - ユーザーネーム変更
+                authVM.editUserNameApple(credential: credential, name: userEditReauthName) {result in
                     if result {
-                        isActive = true // EditUserInfo成功アラート表示用
+                        isActive = true
                     }
                 }
             }
