@@ -7,8 +7,7 @@
 
 import SwiftUI
 
-struct WithdrawalAuthView: View {
-    
+struct WithdrawalButtonView: View {
     // MARK: - ViewModels
     @ObservedObject var authVM = AuthViewModel.shared
     
@@ -49,32 +48,19 @@ struct WithdrawalAuthView: View {
             Divider().padding()
             
             // MARK: - Google
-            Button {
-                authVM.credentialGoogleWithdrawal { result in
-                    if result {
-                        isActive = true
-                    }
-                }
-            } label: {
-                Text("Google退会")
-            }.frame(width:170)
-                .padding()
-                .background(.cyan)
-                .tint(.white)
-                .cornerRadius(5)
-                .padding()
+            GoogleAuthButtonView(isActive: $isActive,userEditReauthName: Binding.constant(""), isCalledFromUserWithDrawaScreen: true)
             
             Divider().padding()
             
             // MARK: - Apple
             Text("Apple退会")
-            AppleAuthButtonView(isActive: $isActive, userEditReauthName: "", userWithDrawa: true)
+            AppleAuthButtonView(isActive: $isActive, userEditReauthName: Binding.constant(""), isCalledFromUserWithDrawaScreen: true)
         }
     }
 }
 
-struct WithdrawalAuthView_Previews: PreviewProvider {
+struct WithdrawalButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        WithdrawalAuthView()
+        WithdrawalButtonView()
     }
 }

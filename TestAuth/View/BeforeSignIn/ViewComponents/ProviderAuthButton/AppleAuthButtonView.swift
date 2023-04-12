@@ -19,14 +19,15 @@ struct AppleAuthButtonView: View {
     @Binding var isActive:Bool
     
     // MARK: -
-    let userEditReauthName:String // 変更するユーザー名 or ブランク("")
+    @Binding var userEditReauthName:String // 変更するユーザー名 or ブランク("")
     
     // MARK: - Flag
-    let userWithDrawa:Bool        // AppleUserWithDrawalViewから呼び出されているか
+    public var isCalledFromUserEditScreen:Bool = false              // EditUserNameViewから呼び出されているか
+    public var isCalledFromUserWithDrawaScreen:Bool = false         // WithdrawalButtonViewから呼び出されているか
     
     // MARK: - Appleボタン　ボタンタイトル表示用
     private var displayButtonTitle:SignInWithAppleButton.Label{
-        if userEditReauthName == "" {
+        if isCalledFromUserEditScreen == false {
             return .signIn
         }else{
             return .continue
@@ -50,9 +51,9 @@ struct AppleAuthButtonView: View {
             // MARK: - 以下ボタンアクション分岐
             
             
-            if userEditReauthName == ""{
+            if isCalledFromUserEditScreen == false {
                 
-                if userWithDrawa == false {
+                if isCalledFromUserWithDrawaScreen == false {
                     // MARK: - ログイン
                     authVM.credentialAppleSignIn(credential: credential) { result in
                         authVM.resetErrorMsg()
@@ -69,18 +70,14 @@ struct AppleAuthButtonView: View {
                 
             }else{
                 // MARK: - ユーザーネーム変更 未実装
-//                authVM.editUserInfo(credential: credential, name: userEditReauthName) { result in
-//                    if result {
-//                        isActive = true // EditUserInfo成功アラート表示用
-//                    }
-//                }
+                authVM.editUserInfo(credential: credential, name: userEditReauthName, pass: nil) { result in
+                    if result {
+                        isActive = true // EditUserInfo成功アラート表示用
+                    }
+                }
             }
             
         }.frame(width: 200, height: 40)
             .signInWithAppleButtonStyle(.black)
     }
 }
-
-
-
-

@@ -9,52 +9,39 @@ import SwiftUI
 
 struct ContentView: View {
     
-    // MARK: - ViewModels
-    @ObservedObject var authVM = AuthViewModel.shared
-    
-    // MARK: - Navigationプロパティ
-    @State var isActive:Bool = false
-    @State var isActive2:Bool = false
-    
-    @State  var password:String = ""
-    
     var body: some View {
-        VStack{
+        VStack {
             
-            // MARK: - 透明のNavigationLink
-            NavigationLink(isActive: $isActive2, destination:{ LoginAuthView()}, label: {
-                EmptyView()
+            // MARK: - ユーザー名とプロバイダーを表示
+            Text(SignInUserInfoViewModel.shared.signInUserName)
+            Text(SignInUserInfoViewModel.shared.signInUserProvider)
+            
+            Divider()
+            
+            NavigationLink(destination: {EditUserNameView()}, label: {
+                Text("ユーザー情報を編集")
             })
+                .frame(width:200)
+                    .padding()
+                    .background(.cyan)
+                    .tint(.white)
+                    .cornerRadius(5)
+                    .padding()
+
+            SignOutButtonView()
             
-            Text("ようこそ！")
-            Text("\(authVM.getCurrentUser()?.displayName ?? "Appleアカウント")さん")
-            
-            Button {
-                authVM.signOut { result in
-                    if result {
-                        isActive2 = true
-                    }
-                }
-            } label: {
-                Text("SignOut")
-            }.frame(width:70)
-                .padding()
-                .background(.cyan)
-                .tint(.white)
-                .cornerRadius(5)
-                .padding()
-            
-            
-            NavigationLink(isActive: $isActive, destination:{ WithdrawalAuthView()}, label: {
+            NavigationLink(destination: {WithdrawalButtonView()}, label: {
                 Text("退会する")
-            }).frame(width:70)
-                .padding()
-                .background(.cyan)
-                .tint(.white)
-                .cornerRadius(5)
-                .padding()
-   
+            })
+                .frame(width:70)
+                    .padding()
+                    .background(.cyan)
+                    .tint(.white)
+                    .cornerRadius(5)
+                    .padding()
         }
+        .padding()
+        .navigationBarBackButtonHidden(true)
     }
 }
 

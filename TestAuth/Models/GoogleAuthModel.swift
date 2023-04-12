@@ -5,7 +5,6 @@
 //  Created by t&a on 2023/04/01.
 //
 
-
 import FirebaseCore
 import FirebaseAuth
 import GoogleSignIn
@@ -65,8 +64,23 @@ class GoogleAuthModel {
         }
     }
     
+    // MARK: - Apple ユーザーネーム編集
+    public func editUserNameGoogle(user:User,credential:AuthCredential,name:String,completion : @escaping (Result<Bool, Error>) ->  Void ){
+        user.reauthenticate(with: credential) { (authResult, error) in
+                if error == nil {
+                    let request = user.createProfileChangeRequest()
+                    request.displayName = name
+                    request.commitChanges { error in
+                        if error == nil{
+                            completion(.success(true))
+                        }else{
+                            completion(.failure(error!))
+                        }
+                    }
+                }else{
+                    completion(.failure(error!))
+                }
+            }
+        }
+    
 }
-
-
-
-

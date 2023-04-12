@@ -27,10 +27,15 @@
 		1252190B29D92638006AF797 /* NewEntryAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1252190A29D92638006AF797 /* NewEntryAuthView.swift */; };
 		1252190F29D9A0CD006AF797 /* AppleAuthButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1252190E29D9A0CD006AF797 /* AppleAuthButtonView.swift */; };
 		1252191129D9A120006AF797 /* AppleAuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1252191029D9A120006AF797 /* AppleAuthModel.swift */; };
-		1252191429DADC6A006AF797 /* WithdrawalAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1252191329DADC6A006AF797 /* WithdrawalAuthView.swift */; };
+		1252191429DADC6A006AF797 /* WithdrawalButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1252191329DADC6A006AF797 /* WithdrawalButtonView.swift */; };
 		1252191729DB0F63006AF797 /* PasswordResetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1252191629DB0F63006AF797 /* PasswordResetView.swift */; };
 		1252191929DB11DB006AF797 /* AuthErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1252191829DB11DB006AF797 /* AuthErrorModel.swift */; };
 		1252191B29DB7B1B006AF797 /* ErrorMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1252191A29DB7B1B006AF797 /* ErrorMessageView.swift */; };
+		12B4693429E6DA58002E6864 /* SignOutButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B4693329E6DA58002E6864 /* SignOutButtonView.swift */; };
+		12B4693629E6DA68002E6864 /* EditUserNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B4693529E6DA68002E6864 /* EditUserNameView.swift */; };
+		12B4693829E6DB24002E6864 /* SignInUserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B4693729E6DB24002E6864 /* SignInUserInfoViewModel.swift */; };
+		12B4693A29E6DB3A002E6864 /* UserDefaultsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B4693929E6DB3A002E6864 /* UserDefaultsProtocol.swift */; };
+		12B4693C29E6DB91002E6864 /* AuthProviderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B4693B29E6DB91002E6864 /* AuthProviderModel.swift */; };
 		742C1998543B5A8774B2D521 /* Pods_TestAuthTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F820EF8D9282B2F1D45886CA /* Pods_TestAuthTests.framework */; };
 		7B1EFCD00F893B7E140A609A /* Pods_TestAuth_TestAuthUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D320E239470340035F85D8F /* Pods_TestAuth_TestAuthUITests.framework */; };
 		C43731912591B43F6E3CD08F /* Pods_TestAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89608753F4404061506300CF /* Pods_TestAuth.framework */; };
@@ -79,10 +84,15 @@
 		1252190E29D9A0CD006AF797 /* AppleAuthButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuthButtonView.swift; sourceTree = "<group>"; };
 		1252191029D9A120006AF797 /* AppleAuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuthModel.swift; sourceTree = "<group>"; };
 		1252191229D9A19B006AF797 /* TestAuth.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TestAuth.entitlements; sourceTree = "<group>"; };
-		1252191329DADC6A006AF797 /* WithdrawalAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalAuthView.swift; sourceTree = "<group>"; };
+		1252191329DADC6A006AF797 /* WithdrawalButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalButtonView.swift; sourceTree = "<group>"; };
 		1252191629DB0F63006AF797 /* PasswordResetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetView.swift; sourceTree = "<group>"; };
 		1252191829DB11DB006AF797 /* AuthErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthErrorModel.swift; sourceTree = "<group>"; };
 		1252191A29DB7B1B006AF797 /* ErrorMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessageView.swift; sourceTree = "<group>"; };
+		12B4693329E6DA58002E6864 /* SignOutButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutButtonView.swift; sourceTree = "<group>"; };
+		12B4693529E6DA68002E6864 /* EditUserNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserNameView.swift; sourceTree = "<group>"; };
+		12B4693729E6DB24002E6864 /* SignInUserInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUserInfoViewModel.swift; sourceTree = "<group>"; };
+		12B4693929E6DB3A002E6864 /* UserDefaultsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsProtocol.swift; sourceTree = "<group>"; };
+		12B4693B29E6DB91002E6864 /* AuthProviderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthProviderModel.swift; sourceTree = "<group>"; };
 		3AE0DC2F5E4ABDAA6304DFE3 /* Pods-TestAuth.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestAuth.release.xcconfig"; path = "Target Support Files/Pods-TestAuth/Pods-TestAuth.release.xcconfig"; sourceTree = "<group>"; };
 		50E86D1423A9073465BCD78F /* Pods-TestAuth-TestAuthUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestAuth-TestAuthUITests.debug.xcconfig"; path = "Target Support Files/Pods-TestAuth-TestAuthUITests/Pods-TestAuth-TestAuthUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		6166F704343E14D487CBD693 /* Pods-TestAuth.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestAuth.debug.xcconfig"; path = "Target Support Files/Pods-TestAuth/Pods-TestAuth.debug.xcconfig"; sourceTree = "<group>"; };
@@ -193,6 +203,7 @@
 				1252190629D920DF006AF797 /* EmailAuthModel.swift */,
 				125218F429D7B41E006AF797 /* GoogleAuthModel.swift */,
 				1252191829DB11DB006AF797 /* AuthErrorModel.swift */,
+				12B4693B29E6DB91002E6864 /* AuthProviderModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -202,6 +213,8 @@
 			children = (
 				125218F829D91B0F006AF797 /* AuthViewModel.swift */,
 				1252190429D920A5006AF797 /* ValidationViewModel.swift */,
+				12B4693729E6DB24002E6864 /* SignInUserInfoViewModel.swift */,
+				12B4693929E6DB3A002E6864 /* UserDefaultsProtocol.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -211,7 +224,6 @@
 			children = (
 				1252191C29DC4C93006AF797 /* AfterSignIn */,
 				1252191D29DC4CBC006AF797 /* BeforeSignIn */,
-				125218FF29D91EF0006AF797 /* ViewComponents */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -240,7 +252,7 @@
 			isa = PBXGroup;
 			children = (
 				1252190829D9258B006AF797 /* ContentView.swift */,
-				1252191329DADC6A006AF797 /* WithdrawalAuthView.swift */,
+				12B4693229E6DA45002E6864 /* ViewComponents */,
 			);
 			path = AfterSignIn;
 			sourceTree = "<group>";
@@ -251,8 +263,19 @@
 				125218FD29D91E0C006AF797 /* LoginAuthView.swift */,
 				1252190A29D92638006AF797 /* NewEntryAuthView.swift */,
 				1252191629DB0F63006AF797 /* PasswordResetView.swift */,
+				125218FF29D91EF0006AF797 /* ViewComponents */,
 			);
 			path = BeforeSignIn;
+			sourceTree = "<group>";
+		};
+		12B4693229E6DA45002E6864 /* ViewComponents */ = {
+			isa = PBXGroup;
+			children = (
+				12B4693329E6DA58002E6864 /* SignOutButtonView.swift */,
+				12B4693529E6DA68002E6864 /* EditUserNameView.swift */,
+				1252191329DADC6A006AF797 /* WithdrawalButtonView.swift */,
+			);
+			path = ViewComponents;
 			sourceTree = "<group>";
 		};
 		CEA2EED018D2272B1C0F0191 /* Frameworks */ = {
@@ -537,20 +560,25 @@
 			files = (
 				1252191129D9A120006AF797 /* AppleAuthModel.swift in Sources */,
 				125218F929D91B0F006AF797 /* AuthViewModel.swift in Sources */,
+				12B4693629E6DA68002E6864 /* EditUserNameView.swift in Sources */,
 				1252190929D9258B006AF797 /* ContentView.swift in Sources */,
 				1252191B29DB7B1B006AF797 /* ErrorMessageView.swift in Sources */,
 				1252191729DB0F63006AF797 /* PasswordResetView.swift in Sources */,
 				125218CA29D707CF006AF797 /* GoogleAuthButtonView.swift in Sources */,
 				125218F729D919BE006AF797 /* AuthModel.swift in Sources */,
+				12B4693C29E6DB91002E6864 /* AuthProviderModel.swift in Sources */,
 				1252190129D91F00006AF797 /* SecureInputView.swift in Sources */,
 				1252191929DB11DB006AF797 /* AuthErrorModel.swift in Sources */,
 				125218C829D707CF006AF797 /* TestAuthApp.swift in Sources */,
 				1252190B29D92638006AF797 /* NewEntryAuthView.swift in Sources */,
+				12B4693429E6DA58002E6864 /* SignOutButtonView.swift in Sources */,
 				1252190329D9207F006AF797 /* EmailAuthButtonView.swift in Sources */,
 				1252190529D920A5006AF797 /* ValidationViewModel.swift in Sources */,
 				125218FE29D91E0C006AF797 /* LoginAuthView.swift in Sources */,
-				1252191429DADC6A006AF797 /* WithdrawalAuthView.swift in Sources */,
+				12B4693A29E6DB3A002E6864 /* UserDefaultsProtocol.swift in Sources */,
+				1252191429DADC6A006AF797 /* WithdrawalButtonView.swift in Sources */,
 				1252190F29D9A0CD006AF797 /* AppleAuthButtonView.swift in Sources */,
+				12B4693829E6DB24002E6864 /* SignInUserInfoViewModel.swift in Sources */,
 				1252190729D920DF006AF797 /* EmailAuthModel.swift in Sources */,
 				125218F529D7B41E006AF797 /* GoogleAuthModel.swift in Sources */,
 			);

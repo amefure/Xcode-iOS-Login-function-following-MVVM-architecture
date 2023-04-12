@@ -9,7 +9,6 @@ import UIKit
 import FirebaseAuth
 import FirebaseCore
 import AuthenticationServices
-import SwiftUI
 
 class AuthModel {
 
@@ -20,7 +19,7 @@ class AuthModel {
     private  let auth = Auth.auth()
 
     
-    // MARK: - 
+    // MARK: -
     public func getCurrentUser() -> User? {
         return auth.currentUser
     }

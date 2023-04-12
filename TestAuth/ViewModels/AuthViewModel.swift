@@ -4,7 +4,6 @@
 //
 //  Created by t&a on 2023/04/02.
 //
-
 import UIKit
 import FirebaseAuth
 import FirebaseCore
@@ -15,6 +14,10 @@ class AuthViewModel:ObservableObject {
     // MARK: - シングルトン
     static let shared = AuthViewModel()
     
+    // UserDefaultVM
+    private let userInfoVM = SignInUserInfoViewModel.shared
+    
+    // AuthModel
     private var auth = AuthModel.shared
     private let emailAuth = EmailAuthModel.shared
     private let googleAuth = GoogleAuthModel.shared
@@ -22,6 +25,7 @@ class AuthViewModel:ObservableObject {
     
     private let errModel = AuthErrorModel()
     
+    // プロパティ
     @Published var errMessage:String = ""
     
     private func switchResultAndSetErrorMsg(_ result:Result<Bool,Error>) -> Bool{
@@ -39,7 +43,13 @@ class AuthViewModel:ObservableObject {
         self.errMessage = ""
     }
     
-    // MARK: -
+    private func setCurrentUserInfo(provider:AuthProviderModel){
+        userInfoVM.signInUserId = auth.getCurrentUser()!.uid
+        userInfoVM.signInUserName = auth.getCurrentUser()?.displayName ?? auth.defaultName
+        userInfoVM.setSignInProvider(provider: provider)
+    }
+    
+    // MARK: - カレントユーザー取得
     public func getCurrentUser() -> User? {
         return self.auth.getCurrentUser()
     }
@@ -47,7 +57,12 @@ class AuthViewModel:ObservableObject {
     /// サインアウト
     public func signOut(completion: @escaping (Bool) -> Void ) {
         self.auth.SignOut { result in
-            completion(self.switchResultAndSetErrorMsg(result))
+            if self.switchResultAndSetErrorMsg(result) {
+                self.userInfoVM.resetUserInfo() // ユーザー情報をリセット
+                completion(true)
+            }else{
+                completion(false)
+            }
         }
     }
     
@@ -58,6 +73,38 @@ class AuthViewModel:ObservableObject {
         }
     }
     
+    /// ユーザー情報編集
+    public func editUserInfo(credential:AuthCredential?,name:String,pass:String?,completion: @escaping (Bool) -> Void ) {
+        let providerStr = userInfoVM.signInUserProvider
+        switch AuthProviderModel.getProviderModel(rawValue: providerStr) {
+        case .email:
+            emailAuth.editUserInfoEmail(name: name, pass: pass!) { result in
+                self.setCurrentUserInfo(provider: .email)
+                completion(self.switchResultAndSetErrorMsg(result))
+            }
+        case .apple:
+            if let user = auth.getCurrentUser() {
+                appleAuth.editUserNameApple(user: user, credential: credential!, name: name) { result in
+                    self.setCurrentUserInfo(provider: .apple)
+                    completion(self.switchResultAndSetErrorMsg(result))
+                }
+            }
+        case .google:
+            googleAuth.getCredential { credential in
+                if let user = self.auth.getCurrentUser() {
+                    if credential != nil {
+                        self.googleAuth.editUserNameGoogle(user: user, credential: credential!, name: name) { result in
+                            self.setCurrentUserInfo(provider: .google)
+                            completion(self.switchResultAndSetErrorMsg(result))
+                        }
+                    }
+                }
+            }
+        case .none:
+            print("none")
+        }
+        
+    }
     
 }
 
@@ -67,14 +114,24 @@ extension AuthViewModel {
     /// サインイン
     public func emailSignIn(email:String,password:String,completion: @escaping (Bool) -> Void ) {
         emailAuth.signIn(email: email, password: password) { result in
-            completion(self.switchResultAndSetErrorMsg(result))
+            if self.switchResultAndSetErrorMsg(result) {
+                self.setCurrentUserInfo(provider: .email)
+                completion(true)
+            }else{
+                completion(false)
+            }
         }
     }
     
     /// 新規登録
     public func createEmailUser(email:String,password:String,name:String,completion: @escaping (Bool) -> Void ) {
         emailAuth.createUser(email: email, password: password, name: name) { result in
-            completion(self.switchResultAndSetErrorMsg(result))
+            if self.switchResultAndSetErrorMsg(result) {
+                self.setCurrentUserInfo(provider: .email)
+                completion(true)
+            }else{
+                completion(false)
+            }
         }
     }
     
@@ -106,7 +163,12 @@ extension AuthViewModel {
         googleAuth.getCredential { credential in
             if credential != nil {
                 self.auth.credentialSignIn(credential: credential!) { result in
-                    completion(self.switchResultAndSetErrorMsg(result))
+                    if self.switchResultAndSetErrorMsg(result) {
+                        self.setCurrentUserInfo(provider: .google)
+                        completion(true)
+                    }else{
+                        completion(false)
+                    }
                 }
             }
         }
@@ -114,7 +176,7 @@ extension AuthViewModel {
     
     /// 再認証→退会
     public func credentialGoogleWithdrawal(completion: @escaping (Bool) -> Void ) {
-        self.credentialGoogleReaAuth { result in
+        self.credentialGoogleReAuth { result in
             if result {
                 self.withdrawal { result in
                     completion(result)
@@ -124,7 +186,7 @@ extension AuthViewModel {
     }
     
     /// 再認証
-    private func credentialGoogleReaAuth(completion: @escaping (Bool) -> Void ) {
+    private func credentialGoogleReAuth(completion: @escaping (Bool) -> Void ) {
         googleAuth.getCredential { credential in
             if credential != nil {
                 self.googleAuth.reAuthUser(user: self.auth.getCurrentUser()!, credential: credential!) { result in
@@ -142,8 +204,13 @@ extension AuthViewModel {
     ///  サインイン
     public func credentialAppleSignIn(credential:AuthCredential,completion: @escaping (Bool) -> Void ) {
         self.auth.credentialSignIn(credential: credential) { result in
-            print("Apple Login")
-            completion(self.switchResultAndSetErrorMsg(result))
+            
+            if self.switchResultAndSetErrorMsg(result) {
+                self.setCurrentUserInfo(provider: .apple)
+                completion(true)
+            }else{
+                completion(false)
+            }
         }
     }
     
@@ -159,11 +226,5 @@ extension AuthViewModel {
         return appleAuth.switchAuthResult(result: result)
     }
     
-    //    public func editUserInfo(credential:AuthCredential,name:String,completion: @escaping (Bool) -> Void ) {
-    //        if let user = auth.getCurrentUser() {
-    //            appleAuth.editUserNameApple(user: user, credential: credential, name: name) { result in
-    //                completion(result)
-    //            }
-    //        }
-    //    }
 }
+

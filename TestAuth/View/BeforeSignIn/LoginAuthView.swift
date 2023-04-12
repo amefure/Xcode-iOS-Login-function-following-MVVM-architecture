@@ -48,10 +48,10 @@ struct LoginAuthView: View {
             Text("または").padding()
             
             // MARK: - Googleアカウントログイン
-            GoogleAuthButtonView(isActive: $isActive)
+            GoogleAuthButtonView(isActive: $isActive,userEditReauthName:Binding.constant(""))
             
             // MARK: - Apple IDログイン
-            AppleAuthButtonView(isActive: $isActive,userEditReauthName:"",userWithDrawa: false)
+            AppleAuthButtonView(isActive: $isActive,userEditReauthName:Binding.constant(""))
             // MARK: - 未登録遷移ボタン
             HStack{
                 Spacer()
